@@ -23,9 +23,31 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {  
+  const arr = [...matrix].map(array => array.map(elt => elt === false ? Number(elt) : elt));
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (matrix[row][col] === true) {
+        Number.isInteger(arr[row - 1] && arr[row - 1][col]) 
+          && arr[row - 1][col]++;
+        Number.isInteger(arr[row] && arr[row][col - 1]) 
+          && arr[row][col - 1]++;
+        Number.isInteger(arr[row + 1] && arr[row + 1][col]) 
+          && arr[row + 1][col]++;
+        Number.isInteger(arr[row] && arr[row][col + 1]) 
+          && arr[row][col + 1]++;
+        Number.isInteger(arr[row - 1] && arr[row - 1][col - 1]) 
+          && arr[row - 1][col - 1]++;
+        Number.isInteger(arr[row + 1] && arr[row + 1][col + 1]) 
+          && arr[row + 1][col + 1]++;
+        Number.isInteger(arr[row - 1] && arr[row - 1][col + 1]) 
+          && arr[row - 1][col + 1]++;
+        Number.isInteger(arr[row + 1] && arr[row + 1][col - 1]) 
+          && arr[row + 1][col - 1]++;
+      }
+    }
+  }
+  return arr.map(x => x.map(y => y === true ? 1 : y));                   
 }
 
 module.exports = {
