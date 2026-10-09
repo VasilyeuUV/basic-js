@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../lib');
+// const { NotImplementedError } = require('../lib');
 
 /**
  * In the popular Minesweeper game you have a board with some mines and those cells
@@ -23,11 +23,33 @@ const { NotImplementedError } = require('../lib');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  // Remove line below and write your code here
-  throw new NotImplementedError('Not implemented');
+export function minesweeper(matrix) {  
+  const arr = [...matrix].map(array => array.map(elt => elt === false ? Number(elt) : elt));
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (matrix[row][col] === true) {
+        Number.isInteger(arr[row - 1] && arr[row - 1][col]) 
+          && arr[row - 1][col]++;
+        Number.isInteger(arr[row] && arr[row][col - 1]) 
+          && arr[row][col - 1]++;
+        Number.isInteger(arr[row + 1] && arr[row + 1][col]) 
+          && arr[row + 1][col]++;
+        Number.isInteger(arr[row] && arr[row][col + 1]) 
+          && arr[row][col + 1]++;
+        Number.isInteger(arr[row - 1] && arr[row - 1][col - 1]) 
+          && arr[row - 1][col - 1]++;
+        Number.isInteger(arr[row + 1] && arr[row + 1][col + 1]) 
+          && arr[row + 1][col + 1]++;
+        Number.isInteger(arr[row - 1] && arr[row - 1][col + 1]) 
+          && arr[row - 1][col + 1]++;
+        Number.isInteger(arr[row + 1] && arr[row + 1][col - 1]) 
+          && arr[row + 1][col - 1]++;
+      }
+    }
+  }
+  return arr.map(x => x.map(y => y === true ? 1 : y));                   
 }
 
-module.exports = {
-  minesweeper
-};
+// module.exports = {
+//   minesweeper
+// };

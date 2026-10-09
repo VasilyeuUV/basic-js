@@ -17,7 +17,7 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(sampleActivity) {
+export function dateSample(sampleActivity) {
 
   if (typeof sampleActivity !== 'string')
     return false;
@@ -31,6 +31,6 @@ function dateSample(sampleActivity) {
   return Math.ceil(Math.log(MODERN_ACTIVITY / sampleActivity) / (Math.LN2 / HALF_LIFE_PERIOD));
 }
 
-module.exports = {
-  dateSample
-};
+// module.exports = {
+//   dateSample
+// };
